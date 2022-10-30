@@ -165,6 +165,12 @@ class K10plusTitle(PicaPlainTitle):
         if isinstance(date_created, datetime.date):
             return date_created.isoformat()
 
+    def get_holding(self, epn):
+        items = self.parse_items()
+        for item in items:
+            if item.get_epn() == epn:
+                return item
+
     def get_holdings_via_eln(self, eln):
         items = self.parse_items()
         items = [item for item in items if item.get_eln() == eln]
