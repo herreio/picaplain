@@ -167,21 +167,25 @@ class K10plusTitle(PicaPlainTitle):
 
     def get_holding(self, epn):
         items = self.parse_items()
-        for item in items:
-            if item.get_epn() == epn:
-                return item
+        if isinstance(items, list):
+            for item in items:
+                if item.get_epn() == epn:
+                    return item
 
     def get_holdings_via_eln(self, eln):
         items = self.parse_items()
-        items = [item for item in items if item.get_eln() == eln]
-        return items if len(items) > 0 else None
+        if isinstance(items, list):
+            items = [item for item in items if item.get_eln() == eln]
+            return items if len(items) > 0 else None
 
     def get_holdings_via_iln(self, iln):
         items = self.parse_items()
-        items = [item for item in items if item.get_iln() == iln]
-        return items if len(items) > 0 else None
+        if isinstance(items, list):
+            items = [item for item in items if item.get_iln() == iln]
+            return items if len(items) > 0 else None
 
     def get_holdings_via_isil(self, isil):
         items = self.parse_items()
-        items = [item for item in items if item.get_isil() == isil]
-        return items if len(items) > 0 else None
+        if isinstance(items, list):
+            items = [item for item in items if item.get_isil() == isil]
+            return items if len(items) > 0 else None
