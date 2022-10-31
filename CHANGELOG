@@ -1,3 +1,6 @@
+0.0.2 [2022-10-31]
+- check for NoneType before iterating
+
 0.0.1 [2022-10-30]
 - add method K10plusTitle.get_holding
 
