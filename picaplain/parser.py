@@ -101,30 +101,32 @@ class PicaPlainTitle(PicaPlain):
 
     def parse_local(self):
         holdings = self.get_local()
-        if holdings:
+        if isinstance(holdings, list):
             return [self.local("\n".join(h)) for h in holdings]
 
     def get_items(self):
         holdings = self.parse_local()
-        items = []
-        for holding in holdings:
-            holding_items = holding.get_items()
-            if isinstance(holding_items, list):
-                for i in holding_items:
-                    items.append(i)
-        if len(items) > 0:
-            return items
+        if isinstance(holdings, list):
+            items = []
+            for holding in holdings:
+                holding_items = holding.get_items()
+                if isinstance(holding_items, list):
+                    for i in holding_items:
+                        items.append(i)
+            if len(items) > 0:
+                return items
 
     def parse_items(self):
         holdings = self.parse_local()
-        items = []
-        for holding in holdings:
-            holding_items = holding.parse_items()
-            if isinstance(holding_items, list):
-                for i in holding_items:
-                    items.append(i)
-        if len(items) > 0:
-            return items
+        if isinstance(holdings, list):
+            items = []
+            for holding in holdings:
+                holding_items = holding.parse_items()
+                if isinstance(holding_items, list):
+                    for i in holding_items:
+                        items.append(i)
+            if len(items) > 0:
+                return items
 
 
 class K10plusItem(PicaPlainItem):
