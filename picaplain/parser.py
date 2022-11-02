@@ -70,7 +70,7 @@ class PicaPlainTitle(PicaPlain):
 
 class K10plusItem(PicaPlainItem):
     """
-    https://format.k10plus.de/k10plushelp.pl?cmd=ppindex&katalog=Standard#exemplar
+    https://format.k10plus.de/avram.pl?profile=k10plus-item
     """
 
     def __init__(self, plain):
@@ -125,7 +125,7 @@ class K10plusItem(PicaPlainItem):
 
 class K10plusTitle(PicaPlainTitle):
     """
-    https://format.k10plus.de/k10plushelp.pl?cmd=ppindex&katalog=Standard#titel
+    https://format.k10plus.de/avram.pl?profile=k10plus-title
     """
 
     def __init__(self, plain):
