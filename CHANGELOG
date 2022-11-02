@@ -1,3 +1,6 @@
+0.1.0 [2022-11-02]
+- add classes PicaPlainLocal and K10plusLocal
+
 0.0.3 [2022-11-02]
 - prevent ValueError in K10plusItem.get_date_created
 
