@@ -112,7 +112,10 @@ class K10plusItem(PicaPlainItem):
     def get_date_created_date(self):
         date_created = self.get_date_created()
         if isinstance(date_created, str):
-            return datetime.datetime.strptime(date_created, "%d-%m-%y").date()
+            try:
+                return datetime.datetime.strptime(date_created, "%d-%m-%y").date()
+            except ValueError:  # xx-xx-xx
+                pass
 
     def get_date_created_iso(self):
         date_created = self.get_date_created_date()
