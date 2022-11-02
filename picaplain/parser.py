@@ -34,14 +34,17 @@ class PicaPlainItem(PicaPlain):
         super().__init__(plain)
 
 
-class PicaPlainTitle(PicaPlain):
+class PicaPlainLocal(PicaPlain):
 
     def __init__(self, plain, item=PicaPlainItem):
         super().__init__(plain)
         self.item = item
 
+    def get_iln(self):
+        return self.get_subfield_unique("101@", "a")
+
     def _items_start(self):
-        return [i for i, r in enumerate(self.rows) if r.find("101@") > -1]
+        return [i for i, r in enumerate(self.rows) if r.find("201A") > -1]
 
     def _items_end(self):
         start_i = self._items_start()[1:]
@@ -68,6 +71,62 @@ class PicaPlainTitle(PicaPlain):
             return [self.item("\n".join(i)) for i in items]
 
 
+class PicaPlainTitle(PicaPlain):
+
+    def __init__(self, plain, local=PicaPlainLocal):
+        super().__init__(plain)
+        self.local = local
+
+    def _local_start(self):
+        return [i for i, r in enumerate(self.rows) if r.find("101@") > -1]
+
+    def _local_end(self):
+        start_i = self._local_start()[1:]
+        end_i = [i-1 for i in start_i]
+        end_i.append(len(self.rows)-1)
+        return end_i
+
+    def get_local(self):
+        start_i = self._local_start()
+        end_i = self._local_end()
+        if len(start_i) == len(end_i):
+            holdings = []
+            for j in range(len(start_i)):
+                holding = []
+                for i in range(start_i[j], end_i[j]+1):
+                    holding.append(self.rows[i])
+                holdings.append(holding)
+            if len(holdings) > 0:
+                return holdings
+
+    def parse_local(self):
+        holdings = self.get_local()
+        if holdings:
+            return [self.local("\n".join(h)) for h in holdings]
+
+    def get_items(self):
+        holdings = self.parse_local()
+        items = []
+        for holding in holdings:
+            holding_items = holding.get_items()
+            if isinstance(holding_items, list):
+                for i in holding_items:
+                    items.append(i)
+        if len(items) > 0:
+            return items
+
+    def parse_items(self):
+        holdings = self.parse_local()
+        items = []
+        for holding in holdings:
+            holding_items = holding.parse_items()
+            if isinstance(holding_items, list):
+                for i in holding_items:
+                    items.append(i)
+        if len(items) > 0:
+            return items
+
+
 class K10plusItem(PicaPlainItem):
     """
     https://format.k10plus.de/avram.pl?profile=k10plus-item
@@ -78,9 +137,6 @@ class K10plusItem(PicaPlainItem):
 
     def __repr__(self):
         return "{0} (EPN)".format(self.get_epn())
-
-    def get_iln(self):
-        return self.get_subfield_unique("101@", "a")
 
     def get_latest_transaction_date(self):
         return self.get_subfield_unique("201B", "0")
@@ -123,13 +179,22 @@ class K10plusItem(PicaPlainItem):
             return date_created.isoformat()
 
 
+class K10plusLocal(PicaPlainLocal):
+
+    def __init__(self, plain):
+        super().__init__(plain, item=K10plusItem)
+
+    def __repr__(self):
+        return "{0} (ILN)".format(self.get_iln())
+
+
 class K10plusTitle(PicaPlainTitle):
     """
     https://format.k10plus.de/avram.pl?profile=k10plus-title
     """
 
     def __init__(self, plain):
-        super().__init__(plain, item=K10plusItem)
+        super().__init__(plain, local=K10plusLocal)
 
     def __repr__(self):
         return "{0} (PPN)".format(self.get_ppn())
@@ -182,10 +247,11 @@ class K10plusTitle(PicaPlainTitle):
             return items if len(items) > 0 else None
 
     def get_holdings_via_iln(self, iln):
-        items = self.parse_items()
-        if isinstance(items, list):
-            items = [item for item in items if item.get_iln() == iln]
-            return items if len(items) > 0 else None
+        locals = self.parse_local()
+        if isinstance(locals, list):
+            for local in locals:
+                if local.get_iln() == iln:
+                    return local.parse_items()
 
     def get_holdings_via_isil(self, isil):
         items = self.parse_items()
