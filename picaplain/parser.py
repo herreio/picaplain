@@ -182,6 +182,9 @@ class K10plusItem(PicaPlainItem):
 
 
 class K10plusLocal(PicaPlainLocal):
+    """
+    https://format.k10plus.de/avram.pl?profile=k10plus-local
+    """
 
     def __init__(self, plain):
         super().__init__(plain, item=K10plusItem)
