@@ -152,8 +152,14 @@ class K10plusItem(PicaPlainItem):
     def get_epn(self):
         return self.get_subfield_unique("203@", "0")
 
+    def get_call_number(self):
+        return self.get_subfield_unique("209A", "a")
+
     def get_isil(self):
         return self.get_subfield_unique("209A", "B")
+
+    def get_comment(self):
+        return self.get_subfield_unique("220B", "a", repeat=True)
 
     def get_eln(self):
         first_entry = self.get_first_entry()
@@ -179,6 +185,9 @@ class K10plusItem(PicaPlainItem):
         date_created = self.get_date_created_date()
         if isinstance(date_created, datetime.date):
             return date_created.isoformat()
+
+    def is_ordered(self):
+        return True if self.get_call_number() == "bestellt" else False
 
 
 class K10plusLocal(PicaPlainLocal):
