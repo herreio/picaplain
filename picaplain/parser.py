@@ -152,11 +152,17 @@ class K10plusItem(PicaPlainItem):
     def get_epn(self):
         return self.get_subfield_unique("203@", "0")
 
+    def get_selection_key(self):
+        return self.get_subfield_unique("208@", "b")
+
     def get_call_number(self):
         return self.get_subfield_unique("209A", "a")
 
     def get_isil(self):
         return self.get_subfield_unique("209A", "B")
+
+    def get_lending_indicator(self):
+        return self.get_subfield_unique("209A", "D")
 
     def get_comment(self):
         return self.get_subfield_unique("220B", "a", repeat=True)
