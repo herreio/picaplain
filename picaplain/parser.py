@@ -146,6 +146,18 @@ class K10plusItem(PicaPlainItem):
     def get_latest_transaction_time(self):
         return self.get_subfield_unique("201B", "t")
 
+    def get_latest_transaction_str(self):
+        d = self.get_latest_transaction_date()
+        t = self.get_latest_transaction_time()
+        return "{0} {1}".format(d, t)
+
+    def get_latest_transaction_datetime(self):
+        change_datetime = self.get_latest_transaction_str()
+        try:
+            return datetime.datetime.strptime(change_datetime, "%d-%m-%y %H:%M:%S.%f")
+        except ValueError:
+            pass
+
     def get_first_entry(self):
         return self.get_subfield_unique("201D", "0")
 
@@ -222,11 +234,29 @@ class K10plusTitle(PicaPlainTitle):
     def get_first_entry(self):
         return self.get_subfield_unique("001A", "0")
 
+    def get_latest_transaction_eln(self):
+        return self.get_subfield_unique("001B", "0").split(":")[0]
+
     def get_latest_transaction_date(self):
-        return self.get_subfield_unique("001B", "0")
+        return self.get_subfield_unique("001B", "0").split(":")[1]
 
     def get_latest_transaction_time(self):
         return self.get_subfield_unique("001B", "t")
+
+    def get_latest_transaction_str(self):
+        d = self.get_latest_transaction_date()
+        t = self.get_latest_transaction_time()
+        return "{0} {1}".format(d, t)
+
+    def get_latest_transaction_datetime(self):
+        change_datetime = self.get_latest_transaction_str()
+        try:
+            return datetime.datetime.strptime(change_datetime, "%d-%m-%y %H:%M:%S.%f")
+        except ValueError:
+            try:
+                return datetime.datetime.strptime(change_datetime, "%d-%m-%y 22:22:22:222")
+            except ValueError:
+                pass
 
     def get_ppn(self):
         return self.get_subfield_unique("003@", "0")
