@@ -1,3 +1,9 @@
+0.1.6 [2023-02-28]
+- add module translator
+- fix ValueError in K10plusTitle.get_date_created_date
+- add methods to K10plusItem and K10plusTitle
+- deprecate methods in K10plusItem
+
 0.1.5 [2023-02-28]
 - add method to K10plusTitle
 
