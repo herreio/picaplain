@@ -283,6 +283,9 @@ class K10plusTitle(PicaPlainTitle):
         if isinstance(date_created, datetime.date):
             return date_created.isoformat()
 
+    def get_collection_codes(self):
+        return self.get_subfield("016B", "a", repeat=False)
+
     def get_holding(self, epn):
         items = self.parse_items()
         if isinstance(items, list):
