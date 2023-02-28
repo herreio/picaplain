@@ -1,5 +1,6 @@
 import datetime
 from . import utils
+from . import translator
 
 
 class PicaPlain:
@@ -140,6 +141,9 @@ class K10plusItem(PicaPlainItem):
     def __repr__(self):
         return "{0} (EPN)".format(self.get_epn())
 
+    def get_first_entry(self):
+        return self.get_subfield_unique("201A", "0")
+
     def get_latest_transaction_date(self):
         return self.get_subfield_unique("201B", "0")
 
@@ -158,7 +162,7 @@ class K10plusItem(PicaPlainItem):
         except ValueError:
             pass
 
-    def get_first_entry(self):
+    def get_first_entry_swb(self):
         return self.get_subfield_unique("201D", "0")
 
     def get_epn(self):
@@ -171,21 +175,36 @@ class K10plusItem(PicaPlainItem):
         return self.get_subfield_unique("209A", "a")
 
     def get_isil(self):
+        """deprecated"""
+        return self.get_subfield_unique("209A", "B")
+
+    def get_isil_swb(self):
         return self.get_subfield_unique("209A", "B")
 
     def get_lending_indicator(self):
+        """deprecated"""
         return self.get_subfield_unique("209A", "D")
+
+    def get_lending_indicator_swb(self):
+        return self.get_subfield_unique("209A", "D")
+
+    def get_lending_indicator_swb_translated(self):
+        lending_indicator = self.get_lending_indicator_swb()
+        if isinstance(lending_indicator, str):
+            return translator.translate_lending_indicator_swb(lending_indicator)
 
     def get_comment(self):
         return self.get_subfield_unique("220B", "a", repeat=True)
 
     def get_eln(self):
-        first_entry = self.get_first_entry()
+        first_entry = self.get_first_entry_swb()
         if isinstance(first_entry, str):
-            return first_entry.split(":")[0]
+            first_entry_split = first_entry.split(":")
+            if len(first_entry_split) > 0:
+                return first_entry_split[0]
 
     def get_date_created(self):
-        first_entry = self.get_first_entry()
+        first_entry = self.get_first_entry_swb()
         if isinstance(first_entry, str):
             first_entry_split = first_entry.split(":")
             if len(first_entry_split) > 1:
@@ -276,7 +295,10 @@ class K10plusTitle(PicaPlainTitle):
     def get_date_created_date(self):
         date_created = self.get_date_created()
         if isinstance(date_created, str):
-            return datetime.datetime.strptime(date_created, "%d-%m-%y").date()
+            try:
+                return datetime.datetime.strptime(date_created, "%d-%m-%y").date()
+            except ValueError:  # 00-00-00
+                pass
 
     def get_date_created_iso(self):
         date_created = self.get_date_created_date()
@@ -285,6 +307,16 @@ class K10plusTitle(PicaPlainTitle):
 
     def get_collection_codes(self):
         return self.get_subfield("016B", "a", repeat=False)
+
+    def get_collection_codes_translated(self):
+        collection_codes = self.get_collection_codes()
+        if isinstance(collection_codes, list):
+            collection_codes_translated = [
+                translator.translate_collection_code(c)
+                for c in collection_codes
+            ]
+            if len(collection_codes_translated) > 0:
+                return collection_codes_translated
 
     def get_holding(self, epn):
         items = self.parse_items()
