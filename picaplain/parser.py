@@ -349,6 +349,13 @@ class K10plusTitle(PicaPlainTitle):
                 if item.get_epn() == epn:
                     return item
 
+    def get_holding_swb(self, swb_epn):
+        items = self.parse_items()
+        if isinstance(items, list):
+            for item in items:
+                if item.get_epn_swb() == swb_epn:
+                    return item
+
     def get_holdings_via_eln(self, eln):
         items = self.parse_items()
         if isinstance(items, list):
