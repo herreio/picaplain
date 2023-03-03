@@ -321,6 +321,15 @@ class K10plusTitle(PicaPlainTitle):
             if len(collection_codes_translated) > 0:
                 return collection_codes_translated
 
+    def get_product_codes(self):
+        return self.get_subfield("017L", "a", subrepeat=False)
+
+    def get_product_license_type(self):
+        return self.get_subfield("017L", "k", subrepeat=False)
+
+    def get_product_date_supplied(self):
+        return self.get_subfield("017L", "t", subrepeat=False)
+
     def get_holding(self, epn):
         items = self.parse_items()
         if isinstance(items, list):
