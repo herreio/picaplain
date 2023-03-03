@@ -330,6 +330,18 @@ class K10plusTitle(PicaPlainTitle):
     def get_product_date_supplied(self):
         return self.get_subfield("017L", "t", subrepeat=False)
 
+    def get_specialised_information_service_fid(self):
+        return self.get_subfield("045V", "i", subrepeat=False)
+
+    def get_specialised_information_service_ssg(self):
+        return self.get_subfield("045V", "a")
+
+    def get_specialised_information_service_isil(self):
+        return self.get_subfield("045V", "q", subrepeat=False)
+
+    def get_specialised_information_service_source(self):
+        return self.get_subfield("045V", "A")
+
     def get_holding(self, epn):
         items = self.parse_items()
         if isinstance(items, list):
