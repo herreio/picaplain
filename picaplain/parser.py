@@ -363,7 +363,8 @@ class K10plusTitle(PicaPlainTitle):
                     return local.parse_items()
 
     def get_holdings_via_isil(self, isil):
+        """SWB"""
         items = self.parse_items()
         if isinstance(items, list):
-            items = [item for item in items if item.get_isil() == isil]
+            items = [item for item in items if item.get_isil_swb() == isil]
             return items if len(items) > 0 else None
