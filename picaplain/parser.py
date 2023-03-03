@@ -168,6 +168,9 @@ class K10plusItem(PicaPlainItem):
     def get_epn(self):
         return self.get_subfield_unique("203@", "0")
 
+    def get_epn_swb(self):
+        return self.get_subfield_unique("203S", "0")
+
     def get_selection_key(self):
         return self.get_subfield_unique("208@", "b")
 
