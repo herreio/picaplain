@@ -41,9 +41,38 @@ COLLECTION_CODE = {
     "WLMMA": "Wolfgang Laade Music of Man Archive",
 }
 
+URL_LICENSE_CODE = {
+    # Pica 4950 / Pica+ 017C / URL zum Volltext / Unterfeld: $4 / Lizenzinformationen
+    # Quelle: https://swbtools.bsz-bw.de/cgi-bin/k10plushelp.pl?cmd=kat&katalog=Standard&val=4950#$4
+    # Stand: 2023-03-09
+    "EL": "Einzellizenz",
+    "KF": "Kostenfrei zugänglich nach Registrierung",
+    "KW": "Teilweise kostenfrei zugänglich (überwiegender Teil oder ab bzw. vor einem bestimmten Zeitpunkt (Moving Wall) kostenfrei zugänglich)",
+    "LF": "Kostenfrei zugänglich ohne Registrierung",
+    "NL": "Nationallizenz",
+    "PU": "Pay-per-Use",
+    "ZZ": "Lizenzpflichtig"
+}
+
+URL_ORIGIN_CODE = {
+    # Pica 4950 / Pica+ 017C / URL zum Volltext / Unterfeld: $x / Interne Bemerkungen
+    # Quelle: https://swbtools.bsz-bw.de/cgi-bin/k10plushelp.pl?cmd=kat&katalog=Standard&val=4950#$x
+    # Stand: 2023-03-09
+    "H": "Verlag",
+    "A": "Agentur",
+    "D": "Digitalisierung",
+    "F": "EZB",
+    "C": "Archivierung",
+    "G": "Aggregator",
+    "L": "Langzeitarchivierung",
+    "N": "Langzeitarchivierung Nationalbibliothek",
+    "R": "Resolving-System",
+    "T": "DBIS"
+}
+
 LENDING_INDICATOR_SWB = {
-    # Pica3 7100 / Pica+ 209A/$x00-09 / Signatur
-    # Quelle: https://swbtools.bsz-bw.de/cgi-bin/k10plushelp.pl?cmd=kat&katalog=Standard&val=7100
+    # Pica3 7100 / Pica+ 209A/$x00-09 / Signatur / Unterfeld: $D / Ausleihindikator (nur SWB)
+    # Quelle: https://swbtools.bsz-bw.de/cgi-bin/k10plushelp.pl?cmd=kat&katalog=Standard&val=7100#$D
     # Stand: 2023-02-28
     "e": "Erwerbungsdaten",
     "l": "Nur für den Lesesaal",
@@ -68,3 +97,11 @@ def translate_lending_indicator_swb(indicator):
 
 def translate_collection_code(code):
     return translate(code, COLLECTION_CODE)
+
+
+def translate_url_license_code(code):
+    return translate(code, URL_LICENSE_CODE)
+
+
+def translate_url_origin_code(code):
+    return translate(code, URL_ORIGIN_CODE)

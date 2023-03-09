@@ -321,6 +321,85 @@ class K10plusTitle(PicaPlainTitle):
             if len(collection_codes_translated) > 0:
                 return collection_codes_translated
 
+    def get_url(self):
+        return self.get_subfield("017C", "u", subrepeat=False)
+
+    def get_url_origin_codes(self):
+        return self.get_subfield("017C", "x")
+
+    def get_url_origin_codes_translated(self):
+        origin_codes = self.get_url_origin_codes()
+        if isinstance(origin_codes, list) and len(origin_codes) > 0:
+            if isinstance(origin_codes[0], list):
+                origin_codes_translated = [
+                    [translator.translate_url_origin_code(c) for c in ocs]
+                    for ocs in origin_codes
+                ]
+                if len(origin_codes_translated) > 0:
+                    return origin_codes_translated
+
+    def get_url_origin_codes_unique(self):
+        origin_codes = self.get_url_origin_codes()
+        if isinstance(origin_codes, list) and len(origin_codes) > 0:
+            if isinstance(origin_codes[0], list):
+                origin_codes = [c for ocs in origin_codes for c in ocs]
+                origin_codes = list(set(origin_codes))
+                origin_codes.sort()
+                return origin_codes
+
+    def get_url_origin_codes_unique_translated(self):
+        origin_codes = self.get_url_origin_codes_unique()
+        if isinstance(origin_codes, list):
+            origin_codes_translated = [
+                translator.translate_url_origin_code(c)
+                for c in origin_codes
+            ]
+            if len(origin_codes_translated) > 0:
+                return origin_codes_translated
+
+    def get_url_display_text(self):
+        return self.get_subfield("017C", "y", subrepeat=False)
+
+    def get_url_description(self):
+        return self.get_subfield("017C", "3", subrepeat=False)
+
+    def get_url_description_unique(self):
+        url_descriptions = self.get_url_description()
+        if isinstance(url_descriptions, list):
+            url_descriptions = list(set(url_descriptions))
+            url_descriptions.sort()
+            return url_descriptions
+
+    def get_url_license_codes(self):
+        return self.get_subfield("017C", "4", subrepeat=False)
+
+    def get_url_license_codes_translated(self):
+        license_codes = self.get_url_license_codes()
+        if isinstance(license_codes, list):
+            license_codes_translated = [
+                translator.translate_url_license_code(c)
+                for c in license_codes
+            ]
+            if len(license_codes_translated) > 0:
+                return license_codes_translated
+
+    def get_url_license_codes_unique(self):
+        license_codes = self.get_url_license_codes()
+        if isinstance(license_codes, list):
+            license_codes = list(set(license_codes))
+            license_codes.sort()
+            return license_codes
+
+    def get_url_license_codes_unique_translated(self):
+        license_codes = self.get_url_license_codes_unique()
+        if isinstance(license_codes, list):
+            license_codes_translated = [
+                translator.translate_url_license_code(c)
+                for c in license_codes
+            ]
+            if len(license_codes_translated) > 0:
+                return license_codes_translated
+
     def get_product_codes(self):
         return self.get_subfield("017L", "a", subrepeat=False)
 
