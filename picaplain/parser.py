@@ -253,6 +253,24 @@ class K10plusTitle(PicaPlainTitle):
     def __repr__(self):
         return "{0} (PPN)".format(self.get_ppn())
 
+    def get_ilns(self):
+        return self.get_subfield_unique("001@", "0")
+
+    def get_ilns_as_list(self):
+        ilns = self.get_ilns()
+        if isinstance(ilns, str) and len(ilns) > 0:
+            return ilns.split(",")
+
+    def get_ilns_system_flag(self):
+        return self.get_subfield_unique("001@", "a")
+
+    def get_ilns_system_flag_translated(self):
+        system_flag = self.get_ilns_system_flag()
+        if isinstance(system_flag, str):
+            system_flag_translated = translator.translate_ilns_system_flag(system_flag)
+            if isinstance(system_flag_translated, str):
+                return system_flag_translated
+
     def get_first_entry(self):
         return self.get_subfield_unique("001A", "0")
 

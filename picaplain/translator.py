@@ -1,3 +1,30 @@
+ILNS_SYSTEM_FLAG = {
+    # 0000 / 001@ / ILNs der Bibliotheken mit Exemplarsatz / Unterfeld: _;_
+    # Quelle: https://swbtools.bsz-bw.de/cgi-bin/k10plushelp.pl?cmd=kat&katalog=Standard&adm=1&val=0000#_;_
+    # Stand: 2023-03-09
+    "A": "Aufsatz in sonstigen Filesets",
+    "C": "EBSCO (obsolet)",
+    "D": "Elsevier (obsolet)",
+    "F": "Springer Verlag (obsolet)",
+    "G": "Academic Press (obsolet)",
+    "J": "Anzeige in GSO",
+    "K": "Kluwer (obsolet)",
+    "L": "aus GVK/K10plus kopierte Aufsätze",
+    "M": "aus Fileset nach GVK/K10plus kopierte Aufsätze",
+    "N": "Keine Anzeige in GSO",
+    "S": "ZD18 (obsolet)",
+    "U": "Aufsatz in K10plus",
+    "V": "British Library (obsolet)",
+    "0": "Nicht FLS (obsolet)",
+    "1": "FLS (obsolet)",
+    "2": "GVK StB Bremen",
+    "3": "Einspielpool zur Bearbeitung",
+    "4": "SBB-PK (obsolet)",
+    "5": "SBB Retro (obsolet)",
+    "6": "GVK und PAK",
+    "7": "OLC Zeitschriften",
+    "9": "Kieler Mathematik-Daten (obsolet)"
+}
 COLLECTION_CODE = {
     # 0575 / 016B / Code für Sammlungen
     # Quelle: https://swbtools.bsz-bw.de/cgi-bin/k10plushelp.pl?cmd=kat&katalog=Standard&val=0575
@@ -91,8 +118,8 @@ def translate(code, db):
         return db[code]
 
 
-def translate_lending_indicator_swb(indicator):
-    return translate(indicator, LENDING_INDICATOR_SWB)
+def translate_ilns_system_flag(flag):
+    return translate(flag, ILNS_SYSTEM_FLAG)
 
 
 def translate_collection_code(code):
@@ -105,3 +132,7 @@ def translate_url_license_code(code):
 
 def translate_url_origin_code(code):
     return translate(code, URL_ORIGIN_CODE)
+
+
+def translate_lending_indicator_swb(indicator):
+    return translate(indicator, LENDING_INDICATOR_SWB)
