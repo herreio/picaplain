@@ -259,7 +259,28 @@ class K10plusTitle(PicaPlainTitle):
     def get_ilns_as_list(self):
         ilns = self.get_ilns()
         if isinstance(ilns, str) and len(ilns) > 0:
-            return ilns.split(",")
+            ilns = ilns.split(",")
+            ilns_expanded = []
+            for iln in ilns:
+                if "-" in iln:
+                    i = iln.split("-")
+                    i = [str(j) for j in range(int(i[0]), int(i[1])+1)]
+                    for k in i:
+                        if k in ilns_expanded:
+                            continue
+                        ilns_expanded.append(k)
+                    continue
+                if iln in ilns_expanded:
+                    continue
+                ilns_expanded.append(iln)
+            return ilns_expanded
+
+    def has_iln_lfer(self):
+        ilns = self.get_ilns_as_list()
+        if isinstance(ilns, list):
+            if "2403" in ilns:
+                return True
+            return False
 
     def get_ilns_system_flag(self):
         return self.get_subfield_unique("001@", "a")
