@@ -16,6 +16,10 @@ def translate_collection_code(code):
     return translate(code, translations.COLLECTION_CODE)
 
 
+def translate_url_producer_type(code):
+    return translate(code, translations.URL_PRODUCER_TYPE)
+
+
 def translate_url_license_code(code):
     return translate(code, translations.URL_LICENSE_CODE)
 

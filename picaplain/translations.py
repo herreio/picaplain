@@ -69,17 +69,13 @@ COLLECTION_CODE = {
     "WLMMA": "Wolfgang Laade Music of Man Archive",
 }
 
-URL_LICENSE_CODE = {
-    # Pica3 4950 / Pica+ 017C / URL zum Volltext / Unterfeld: $4 / Lizenzinformationen
-    # Quelle: https://swbtools.bsz-bw.de/cgi-bin/k10plushelp.pl?cmd=kat&katalog=Standard&val=4950#$4
-    # Stand: 2023-03-09
-    "EL": "Einzellizenz",
-    "KF": "Kostenfrei zugänglich nach Registrierung",
-    "KW": "Teilweise kostenfrei zugänglich (überwiegender Teil oder ab bzw. vor einem bestimmten Zeitpunkt (Moving Wall) kostenfrei zugänglich)",
-    "LF": "Kostenfrei zugänglich ohne Registrierung",
-    "NL": "Nationallizenz",
-    "PU": "Pay-per-Use",
-    "ZZ": "Lizenzpflichtig"
+URL_PRODUCER_TYPE = {
+    # Pica3 4950 / Pica+ 017C / URL zum Volltext / Unterfeld: $m / Kennzeichnung des Produzenten/Lieferanten
+    # https://swbtools.bsz-bw.de/cgi-bin/k10plushelp.pl?cmd=kat&katalog=Standard&val=4950#$m
+    # Stand: 2023-03-11
+    "V": "Verbund",
+    "B": "Bibliothek",
+    "X": "Verlag"
 }
 
 URL_ORIGIN_CODE = {
@@ -96,6 +92,19 @@ URL_ORIGIN_CODE = {
     "N": "Langzeitarchivierung Nationalbibliothek",
     "R": "Resolving-System",
     "T": "DBIS"
+}
+
+URL_LICENSE_CODE = {
+    # Pica3 4950 / Pica+ 017C / URL zum Volltext / Unterfeld: $4 / Lizenzinformationen
+    # Quelle: https://swbtools.bsz-bw.de/cgi-bin/k10plushelp.pl?cmd=kat&katalog=Standard&val=4950#$4
+    # Stand: 2023-03-09
+    "EL": "Einzellizenz",
+    "KF": "Kostenfrei zugänglich nach Registrierung",
+    "KW": "Teilweise kostenfrei zugänglich (überwiegender Teil oder ab bzw. vor einem bestimmten Zeitpunkt (Moving Wall) kostenfrei zugänglich)",
+    "LF": "Kostenfrei zugänglich ohne Registrierung",
+    "NL": "Nationallizenz",
+    "PU": "Pay-per-Use",
+    "ZZ": "Lizenzpflichtig"
 }
 
 LENDING_INDICATOR_SWB = {

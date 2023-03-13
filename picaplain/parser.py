@@ -360,6 +360,40 @@ class K10plusTitle(PicaPlainTitle):
             if len(collection_codes_translated) > 0:
                 return collection_codes_translated
 
+    def get_url_producer(self):
+        return self.get_subfield("017C", "m")
+
+    def get_url_producer_types(self):
+        url_producer = self.get_url_producer()
+        if isinstance(url_producer, list) and len(url_producer) > 0:
+            if isinstance(url_producer[0], list):
+                producer_type = [[p.split(":")[0] for p in pts
+                                  if len(p.split(":")) > 0]
+                                 for pts in url_producer]
+                if len(producer_type) > 0:
+                    return producer_type
+
+    def get_url_producer_types_translated(self):
+        producer_types = self.get_url_producer_types()
+        if isinstance(producer_types, list) and len(producer_types) > 0:
+            if isinstance(producer_types[0], list):
+                producer_types_translated = [
+                    [translator.translate_url_producer_type(p) for p in pts]
+                    for pts in producer_types
+                ]
+                if len(producer_types_translated) > 0:
+                    return producer_types_translated
+
+    def get_url_producer_codes(self):
+        url_producer = self.get_url_producer()
+        if isinstance(url_producer, list) and len(url_producer) > 0:
+            if isinstance(url_producer[0], list):
+                producer_codes = [[p.split(":")[1] for p in pcs
+                                   if len(p.split(":")) > 0]
+                                  for pcs in url_producer]
+                if len(producer_codes) > 0:
+                    return producer_codes
+
     def get_url(self):
         return self.get_subfield("017C", "u", subrepeat=False)
 
