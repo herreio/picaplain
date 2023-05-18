@@ -1,3 +1,4 @@
+import re
 import datetime
 from . import utils
 from . import translator
@@ -45,7 +46,16 @@ class PicaPlainLocal(PicaPlain):
         return self.get_subfield_unique("101@", "a")
 
     def _items_start(self):
-        return [i for i, r in enumerate(self.rows) if r.find("201A") > -1]
+        pos = []
+        curr = 0
+        for i, r in enumerate(self.rows[1:]):
+            m = re.match(r"^2\d{2}[A-Z@]\/(\d{2}).*$", r)
+            if m is not None and len(m.groups()) > 0:
+                no = int(m.groups()[0])
+                if no > curr:
+                    pos.append(i+1)
+                    curr = no
+        return pos
 
     def _items_end(self):
         start_i = self._items_start()[1:]
