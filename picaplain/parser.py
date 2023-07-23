@@ -181,11 +181,23 @@ class K10plusItem(PicaPlainItem):
     def get_epn_swb(self):
         return self.get_subfield_unique("203S", "0")
 
+    def get_epn_zdb(self):
+        return self.get_subfield_unique("206Z", "0")
+
     def get_selection_key(self):
         return self.get_subfield_unique("208@", "b")
 
     def get_call_number(self):
         return self.get_subfield_unique("209A", "a")
+
+    def get_call_number_public_note(self):
+        return self.get_subfield_unique("209A", "c")
+
+    def get_special_location(self):
+        return self.get_subfield_unique("209A", "g")
+
+    def get_call_number_special_location(self):
+        return self.get_subfield_unique("209A", "f")
 
     def get_isil(self):
         """deprecated"""
@@ -206,8 +218,42 @@ class K10plusItem(PicaPlainItem):
         if isinstance(lending_indicator, str):
             return translator.translate_lending_indicator_swb(lending_indicator)
 
+    def get_interlibrary_loan_indicator_swb(self):
+        return self.get_subfield_unique("209A", "J")
+
+    def get_interlibrary_loan_indicator_swb_translated(self):
+        ill_indicator = self.get_interlibrary_loan_indicator_swb()
+        if isinstance(ill_indicator, str) and len(ill_indicator) > 0:
+            if len(ill_indicator) > 1:
+                return [
+                    translator.translate_interlibrary_loan_indicator_pos1(ill_indicator[0]),
+                    translator.translate_interlibrary_loan_indicator_pos2(ill_indicator[1])
+                ]
+            return translator.translate_interlibrary_loan_indicator_pos1(ill_indicator[0])
+
+    def get_local_url(self):
+        return self.get_subfield_unique("209R", "u", repeat=True)
+
     def get_comment(self):
         return self.get_subfield_unique("220B", "a", repeat=True)
+
+    def get_textual_holdings(self):
+        return self.get_subfield_unique("231B", "a")
+
+    def get_textual_holdings_sort(self):
+        return self.get_subfield_unique("231B", "g")
+
+    def get_textual_holdings_missing(self):
+        return self.get_subfield_unique("231C", "a")
+
+    def get_textual_holdings_public_note(self):
+        return self.get_subfield_unique("231D", "a")
+
+    def get_textual_holdings_introduction(self):
+        return self.get_subfield_unique("231E", "a")
+
+    def get_inventory_public_note(self):
+        return self.get_subfield("237A", "a")
 
     def get_eln(self):
         first_entry = self.get_first_entry_swb()

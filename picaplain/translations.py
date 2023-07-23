@@ -119,3 +119,22 @@ LENDING_INDICATOR_SWB = {
     "u": "Sonstige Ausleihbeschränkung",
     "v": "Nicht verfügbar"
 }
+
+INTERLIBRARY_LOAN_INDICATOR_POS1_SWB = {
+    # Pica3 7100 / Pica+ 209A/$x00-09 / Signatur / Unterfeld: $J / Fernleihcode (nur SWB)
+    # Quelle: https://format.k10plus.de/k10plushelp.pl?cmd=kat&katalog=Standard&val=7100#$J
+    # Stand: 2023-07-23
+    "l": "Fernleihe (Kopie und Ausleihe)",
+    "a": "Fernleihe (Nur Ausleihe)",
+    "k": "Fernleihe (Nur Kopie)",
+    "n": "Keine Fernleihe",
+    "e": "Fernleihe (Nur Kopie), elektronischer Versand an Endnutzer möglich"
+}
+
+INTERLIBRARY_LOAN_INDICATOR_POS2_SWB = {
+    # Pica3 7100 / Pica+ 209A/$x00-09 / Signatur / Unterfeld: $J / Fernleihcode (nur SWB)
+    # Quelle: https://format.k10plus.de/k10plushelp.pl?cmd=kat&katalog=Standard&val=7100#$J
+    # Stand: 2023-07-23
+    "n": "Fernleihe nur im Inland",
+    "p": "elektronischer Übertragungsweg zwischen Bibliotheken vertraglich ausgeschlossen"
+}

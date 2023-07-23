@@ -30,3 +30,11 @@ def translate_url_origin_code(code):
 
 def translate_lending_indicator_swb(indicator):
     return translate(indicator, translations.LENDING_INDICATOR_SWB)
+
+
+def translate_interlibrary_loan_indicator_pos1(indicator):
+    return translate(indicator, translations.INTERLIBRARY_LOAN_INDICATOR_POS1_SWB)
+
+
+def translate_interlibrary_loan_indicator_pos2(indicator):
+    return translate(indicator, translations.INTERLIBRARY_LOAN_INDICATOR_POS2_SWB)
