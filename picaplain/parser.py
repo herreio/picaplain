@@ -583,3 +583,27 @@ class K10plusTitle(PicaPlainTitle):
         if isinstance(items, list):
             items = [item for item in items if item.get_isil_swb() == isil]
             return items if len(items) > 0 else None
+
+    def get_provenance_isil(self):
+        return self.get_subfield_unique("092B", "5", repeat=True)
+
+    def get_provenance_text(self):
+        return self.get_subfield_unique("092B", "k", repeat=True)
+
+    def get_provenance_call_number(self):
+        return self.get_subfield_unique("092B", "3", repeat=True)
+
+    def get_provenance_epn(self):
+        return self.get_subfield_unique("092B", "2", repeat=True)
+
+    def get_provenance_indicator(self):
+        return self.get_subfield_unique("092B", "S", repeat=True)
+
+    def get_provenance_ppn(self):
+        return self.get_subfield_unique("092B", "9", repeat=True)
+
+    def get_provenance_gnd(self):
+        return self.get_subfield_unique("092B", "6", repeat=True)
+
+    def get_provenance_tpro(self):
+        return self.get_subfield("092B", "b")
