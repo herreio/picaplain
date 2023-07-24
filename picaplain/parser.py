@@ -538,6 +538,9 @@ class K10plusTitle(PicaPlainTitle):
     def get_product_date_supplied(self):
         return self.get_subfield("017L", "t", subrepeat=False)
 
+    def get_additional_comment(self):
+        return self.get_subfield_unique("037A", "a", repeat=True)
+
     def get_specialised_information_service_fid(self):
         return self.get_subfield("045V", "i", subrepeat=False)
 
@@ -604,6 +607,12 @@ class K10plusTitle(PicaPlainTitle):
 
     def get_provenance_gnd(self):
         return self.get_subfield_unique("092B", "6", repeat=True)
+
+    def get_provenance_name(self):
+        return self.get_subfield_unique("092B", "a", repeat=True)
+
+    def get_provenance_url(self):
+        return self.get_subfield_unique("092B", "u", repeat=True)
 
     def get_provenance_tpro(self):
         return self.get_subfield("092B", "b")
