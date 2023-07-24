@@ -184,6 +184,9 @@ class K10plusItem(PicaPlainItem):
     def get_epn_zdb(self):
         return self.get_subfield_unique("206Z", "0")
 
+    def get_new_entry(self):
+        return self.get_subfield_unique("208@", "a")
+
     def get_selection_key(self):
         return self.get_subfield_unique("208@", "b")
 
