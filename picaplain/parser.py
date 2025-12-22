@@ -175,6 +175,9 @@ class K10plusItem(PicaPlainItem):
     def get_first_entry_swb(self):
         return self.get_subfield_unique("201D", "0")
 
+    def get_latest_transaction_gbv(self):
+        return self.get_subfield_unique("202D", "0")
+
     def get_epn(self):
         return self.get_subfield_unique("203@", "0")
 
@@ -234,6 +237,9 @@ class K10plusItem(PicaPlainItem):
                 ]
             return translator.translate_interlibrary_loan_indicator_pos1(ill_indicator[0])
 
+    def get_barcode(self):
+        return self.get_subfield_unique("209G", "a", repeat=True)
+
     def get_local_url(self):
         return self.get_subfield_unique("209R", "u", repeat=True)
 
@@ -282,6 +288,19 @@ class K10plusItem(PicaPlainItem):
 
     def get_date_created_iso(self):
         date_created = self.get_date_created_date()
+        if isinstance(date_created, datetime.date):
+            return date_created.isoformat()
+
+    def get_new_entry_date(self):
+        date_created = self.get_new_entry()
+        if isinstance(date_created, str):
+            try:
+                return datetime.datetime.strptime(date_created, "%d-%m-%y").date()
+            except ValueError:
+                pass
+
+    def get_new_entry_iso(self):
+        date_created = self.get_new_entry_date()
         if isinstance(date_created, datetime.date):
             return date_created.isoformat()
 
