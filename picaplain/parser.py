@@ -175,8 +175,22 @@ class K10plusItem(PicaPlainItem):
     def get_first_entry_swb(self):
         return self.get_subfield_unique("201D", "0")
 
-    def get_latest_transaction_gbv(self):
+    def get_latest_transaction_date_gbv(self):
         return self.get_subfield_unique("202D", "0")
+
+    def get_latest_transaction_date_gbv_date(self):
+        date_modified = self.get_latest_transaction_date_gbv()
+        if isinstance(date_modified, str):
+            try:
+                return datetime.datetime.strptime(date_modified, "%d-%m-%y").date()
+            except ValueError:
+                pass
+
+    def get_latest_transaction_eln_gbv(self):
+        return self.get_subfield_unique("202D", "a")
+
+    def get_latest_transaction_by_gbv(self):
+        return self.get_subfield_unique("202D", "b")
 
     def get_epn(self):
         return self.get_subfield_unique("203@", "0")
