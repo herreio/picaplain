@@ -28,6 +28,10 @@ def translate_url_origin_code(code):
     return translate(code, translations.URL_ORIGIN_CODE)
 
 
+def translate_lending_indicator_gbv(indicator):
+    return translate(indicator, translations.LENDING_INDICATOR_GBV)
+
+
 def translate_lending_indicator_swb(indicator):
     return translate(indicator, translations.LENDING_INDICATOR_SWB)
 

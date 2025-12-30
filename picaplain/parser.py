@@ -230,6 +230,9 @@ class K10plusItem(PicaPlainItem):
         """deprecated"""
         return self.get_subfield_unique("209A", "D")
 
+    def get_lending_indicator_gbv(self):
+        return self.get_subfield_unique("209A", "d")
+
     def get_lending_indicator_swb(self):
         return self.get_subfield_unique("209A", "D")
 

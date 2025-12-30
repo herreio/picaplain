@@ -107,10 +107,27 @@ URL_LICENSE_CODE = {
     "ZZ": "Lizenzpflichtig"
 }
 
+LENDING_INDICATOR_GBV = {
+    # Pica3 7100 / Pica+ 209A/$x00-09 / Signatur / Unterfeld: $d / Ausleihindikator (nur GBV)
+    # Quelle: https://format.k10plus.de/k10plushelp.pl?cmd=kat&katalog=Standard&val=7100#$d
+    # Stand: 2025-12-30
+    "u": "ausleihbar/Fernleihe",
+    "b": "verkürzt ausleihbar/Fernleihe",
+    "c": "ausleihbar/keine Fernleihe",
+    "s": "mit Zustimmung ausleihbar/nur Kopie in die Fernleihe",
+    "d": "mit Zustimmung ausleihbar/Fernleihe",
+    "i": "Lesesaalausleihe/keine Fernleihe",
+    "f": "Lesesaalausleihe/nur Kopie in die Fernleihe",
+    "g": "für die Ausleihe gesperrt/keine Fernleihe",
+    "a": "bestellt/keine Fernleihe",
+    "o": "keine Angabe/keine Fernleihe",
+    "z": "Verlust/ausgesondert/keine Fernleihe"
+}
+
 LENDING_INDICATOR_SWB = {
     # Pica3 7100 / Pica+ 209A/$x00-09 / Signatur / Unterfeld: $D / Ausleihindikator (nur SWB)
-    # Quelle: https://swbtools.bsz-bw.de/cgi-bin/k10plushelp.pl?cmd=kat&katalog=Standard&val=7100#$D
-    # Stand: 2023-02-28
+    # Quelle: https://format.k10plus.de/k10plushelp.pl?cmd=kat&katalog=Standard&val=7100#$D
+    # Stand: 2025-12-30
     "e": "Erwerbungsdaten",
     "l": "Nur für den Lesesaal",
     "p": "Präsenzbestand",
@@ -123,7 +140,7 @@ LENDING_INDICATOR_SWB = {
 INTERLIBRARY_LOAN_INDICATOR_POS1_SWB = {
     # Pica3 7100 / Pica+ 209A/$x00-09 / Signatur / Unterfeld: $J / Fernleihcode (nur SWB)
     # Quelle: https://format.k10plus.de/k10plushelp.pl?cmd=kat&katalog=Standard&val=7100#$J
-    # Stand: 2023-07-23
+    # Stand: 2025-05-30
     "l": "Fernleihe (Kopie und Ausleihe)",
     "a": "Fernleihe (Nur Ausleihe)",
     "k": "Fernleihe (Nur Kopie)",
@@ -134,7 +151,7 @@ INTERLIBRARY_LOAN_INDICATOR_POS1_SWB = {
 INTERLIBRARY_LOAN_INDICATOR_POS2_SWB = {
     # Pica3 7100 / Pica+ 209A/$x00-09 / Signatur / Unterfeld: $J / Fernleihcode (nur SWB)
     # Quelle: https://format.k10plus.de/k10plushelp.pl?cmd=kat&katalog=Standard&val=7100#$J
-    # Stand: 2023-07-23
+    # Stand: 2025-12-30
     "n": "Fernleihe nur im Inland",
     "p": "elektronischer Übertragungsweg zwischen Bibliotheken vertraglich ausgeschlossen"
 }
