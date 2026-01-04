@@ -414,6 +414,35 @@ class K10plusTitle(PicaPlainTitle):
             except ValueError:
                 pass
 
+    def get_latest_status(self):
+        return self.get_subfield_unique("001D", "0")
+
+    def get_eln_status(self):
+        status = self.get_latest_status()
+        if isinstance(status, str):
+            return status.split(":")[0]
+
+    def get_date_status(self):
+        status = self.get_latest_status()
+        if isinstance(status, str):
+            return status.split(":")[1]
+
+    def get_date_status_date(self):
+        date_status = self.get_date_status()
+        if isinstance(date_status, str):
+            try:
+                return datetime.datetime.strptime(date_status, "%d-%m-%y").date()
+            except ValueError:
+                pass
+
+    def get_date_status_iso(self):
+        date_status = self.get_date_status_date()
+        if isinstance(date_status, datetime.date):
+            return date_status.isoformat()
+
+    def get_status(self):
+        return self.get_subfield_unique("002@", "0")
+
     def get_ppn(self):
         return self.get_subfield_unique("003@", "0")
 
